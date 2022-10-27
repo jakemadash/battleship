@@ -7,3 +7,5 @@ const Ship = (length) => {
   };
   return { length, hit, isSunk };
 };
+
+export { Ship };
