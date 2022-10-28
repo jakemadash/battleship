@@ -45,6 +45,7 @@ const Gameboard = () => {
       targetSquare.ship.hit();
       targetSquare.hit = true;
     } else targetSquare.hit = false;
+    return targetSquare.hit;
   };
 
   const fleetSunk = () => {
