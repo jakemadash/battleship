@@ -1,4 +1,5 @@
-import { Player } from "./player.js";
-import { ComputerPlayer } from "./computer-player.js";
-
-ComputerPlayer.play();
+import { Player } from "./modules/player.js";
+import { ComputerPlayer } from "./modules/computer-player.js";
+const player = Player();
+const computer = ComputerPlayer();
+console.log(computer.play(player.gameBoard));
