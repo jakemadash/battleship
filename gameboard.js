@@ -5,13 +5,14 @@ const Gameboard = () => {
     const board = [];
     for (let i = 0; i < 10; i++) {
       for (let j = 0; j < 10; j++) {
-        board.push({ coordinates: [i, j], ship: null });
+        board.push({ coordinates: [i, j], ship: null, hit: null });
       }
     }
     return board;
   };
 
   const board = createBoard();
+  let ships = [];
 
   const createFleet = () => {
     const destroyer = Ship("destroyer", 2);
@@ -19,7 +20,7 @@ const Gameboard = () => {
     const cruiser = Ship("cruiser", 3);
     const battleship = Ship("battleship", 4);
     const carrier = Ship("carrier", 5);
-    const ships = [destroyer, submarine, cruiser, battleship, carrier];
+    ships = [destroyer, submarine, cruiser, battleship, carrier];
     return ships;
   };
 
@@ -28,13 +29,24 @@ const Gameboard = () => {
     let count = 0;
     for (let i = 0; i < ships.length; i++) {
       for (let j = 0; j < ships[i].length; j++) {
-        board[count + j].ship = ships[i].name;
+        board[count + j].ship = ships[i];
       }
       count += 10;
     }
     return board;
   };
-  return { createBoard, placeShips };
+
+  const receiveAttack = (coordinates) => {
+    const targetSquare = board.find(
+      (square) =>
+        JSON.stringify(coordinates) === JSON.stringify(square.coordinates)
+    );
+    if (targetSquare.ship) {
+      targetSquare.ship.hit();
+      targetSquare.hit = true;
+    } else targetSquare.hit = false;
+  };
+  return { createBoard, placeShips, receiveAttack, board };
 };
 
 export { Gameboard };
