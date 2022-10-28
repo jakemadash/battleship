@@ -12,10 +12,16 @@ test("squares have correct coordinate values", () => {
   let count = 0;
   for (let i = 0; i < 10; i++) {
     for (let j = 0; j < 10; j++) {
-      expect([i, j]).toEqual(board[count]);
+      expect([i, j]).toEqual(board[count].coordinates);
       count++;
     }
   }
 });
 
+test("squares all have ship property", () => {
+  for (let i = 0; i < 100; i++) {
+    expect(board[i].ship).toBeDefined();
+  }
+});
 
+test.todo("places ships on correct coordinates");
