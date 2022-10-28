@@ -1,8 +1,12 @@
 /* eslint-disable no-undef */
+import { Ship } from "./ship.js";
 import { Gameboard } from "./gameboard.js";
 
+const ship = Ship("testShip", 1);
+const shipTwo = Ship("testShipTwo", 1);
 const gameBoard = Gameboard();
-const board = gameBoard.createBoard();
+const board = gameBoard.board;
+const ships = gameBoard.ships;
 
 test("creates board with correct number of squares", () => {
   expect(board.length).toBe(100);
@@ -25,3 +29,23 @@ test("squares all have ship property", () => {
 });
 
 test.todo("places ships on correct coordinates");
+
+gameBoard.ships = [];
+
+test("ship and board values update correctly after attack", () => {
+  board[0].ship = ship;
+  ships.push(ship);
+  gameBoard.receiveAttack([0, 0]);
+  gameBoard.receiveAttack([0, 1]);
+  expect(board[0].hit).toBe(true);
+  expect(board[0].ship.isSunk()).toBe(true);
+  expect(board[1].hit).toBe(false);
+});
+
+test("reports whether all ships have sunk", () => {
+  board[2].ship = shipTwo;
+  ships.push(shipTwo);
+  expect(gameBoard.fleetSunk()).toBe(false);
+  gameBoard.receiveAttack([0, 2]);
+  expect(gameBoard.fleetSunk()).toBe(true);
+});

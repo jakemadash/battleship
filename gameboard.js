@@ -12,7 +12,7 @@ const Gameboard = () => {
   };
 
   const board = createBoard();
-  let ships = [];
+  const ships = [];
 
   const createFleet = () => {
     const destroyer = Ship("destroyer", 2);
@@ -20,7 +20,7 @@ const Gameboard = () => {
     const cruiser = Ship("cruiser", 3);
     const battleship = Ship("battleship", 4);
     const carrier = Ship("carrier", 5);
-    ships = [destroyer, submarine, cruiser, battleship, carrier];
+    const ships = [destroyer, submarine, cruiser, battleship, carrier];
     return ships;
   };
 
@@ -46,7 +46,23 @@ const Gameboard = () => {
       targetSquare.hit = true;
     } else targetSquare.hit = false;
   };
-  return { createBoard, placeShips, receiveAttack, board };
+
+  const fleetSunk = () => {
+    let sunk = true;
+    if (ships.length === 0) sunk = false;
+    for (const ship of ships) {
+      if (ship.isSunk() === false) sunk = false;
+    }
+    return sunk;
+  };
+  return {
+    createBoard,
+    placeShips,
+    receiveAttack,
+    fleetSunk,
+    board,
+    ships,
+  };
 };
 
 export { Gameboard };
