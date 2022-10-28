@@ -1,7 +1,11 @@
 /* eslint-disable no-undef */
 import { Ship } from "./ship.js";
 
-const ship = Ship(2);
+const ship = Ship("destroyer", 2);
+
+test("sets ship name", () => {
+  expect(ship.name).toBe("destroyer");
+});
 
 test("sets ship length", () => {
   expect(ship.length).toBe(2);
