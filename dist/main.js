@@ -16,7 +16,7 @@
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modules_player_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/player.js */ \"./src/modules/player.js\");\n/* harmony import */ var _modules_computer_player_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/computer-player.js */ \"./src/modules/computer-player.js\");\n\n\nconst player = (0,_modules_player_js__WEBPACK_IMPORTED_MODULE_0__.Player)();\nconst computer = (0,_modules_computer_player_js__WEBPACK_IMPORTED_MODULE_1__.ComputerPlayer)();\nconsole.log(computer.play(player.gameBoard));\nconsole.log(computer.play(player.gameBoard));\nconsole.log(computer.play(player.gameBoard));\nconsole.log(computer.play(player.gameBoard));\nconsole.log(computer.play(player.gameBoard));\n\n//# sourceURL=webpack://battleship/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modules_player_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/player.js */ \"./src/modules/player.js\");\n/* harmony import */ var _modules_computer_player_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/computer-player.js */ \"./src/modules/computer-player.js\");\n\n\nconst player = (0,_modules_player_js__WEBPACK_IMPORTED_MODULE_0__.Player)();\nconst computer = (0,_modules_computer_player_js__WEBPACK_IMPORTED_MODULE_1__.ComputerPlayer)();\ncomputer.play(player.gameBoard);\n\n//# sourceURL=webpack://battleship/./src/index.js?");
 
 /***/ }),
 
