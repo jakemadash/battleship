@@ -1,25 +1,15 @@
 const DOM = () => {
-  const computerSquares = document.querySelectorAll(".computer-square");
-
-  async function getMove(square) {
-    await square.addEventListener(
-      "click",
-      () => {
-        if (square.textContent === "") {
-          square.classList.remove("computer-square");
-          return square;
-        }
-      },
-      { once: true }
-    );
-  }
+  const computerBoard = document.querySelector(".computer-board");
 
   async function playerMove() {
-    let move = "";
-    computerSquares.forEach(async (square) => {
-      move = await getMove(square);
+    return new Promise((resolve) => {
+      computerBoard.addEventListener("click", (e) => {
+        if (e.target.textContent === "") {
+          e.target.classList.remove("computer-square");
+          resolve(e.target);
+        }
+      });
     });
-    return move;
   }
 
   const markSquare = (playerMove, playerHit) => {

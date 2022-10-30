@@ -5,9 +5,9 @@ const Player = () => {
   const gameBoard = Gameboard();
   gameBoard.placeShips();
 
-  const play = (playerMove) => {
+  const play = (computer, playerMove) => {
     const coordinates = gameBoard.board[playerMove - 1].coordinates;
-    const hit = ComputerPlayer.board.receiveAttack(coordinates);
+    const hit = computer.gameBoard.receiveAttack(coordinates);
     return hit;
   };
 
