@@ -12,8 +12,8 @@ const DOM = () => {
     });
   }
 
-  const markSquare = (playerMove, playerHit) => {
-    if (playerHit === true) {
+  const markSquare = (playerMove, targetSquare) => {
+    if (targetSquare.hit === true) {
       playerMove.textContent = "x";
       playerMove.style.color = "red";
     } else playerMove.textContent = "o";

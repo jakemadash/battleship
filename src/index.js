@@ -10,6 +10,6 @@ const playerMove = await dom.playerMove();
 console.log(playerMove);
 const index = parseInt(playerMove.dataset.number);
 console.log(index);
-const playerHit = player.play(computer, index);
-dom.markSquare(playerMove, playerHit);
+const targetSquare = player.play(computer, index);
+dom.markSquare(playerMove, targetSquare);
 // computer.play(player.gameBoard);

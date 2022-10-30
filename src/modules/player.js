@@ -7,8 +7,8 @@ const Player = () => {
 
   const play = (computer, playerMove) => {
     const coordinates = gameBoard.board[playerMove - 1].coordinates;
-    const hit = computer.gameBoard.receiveAttack(coordinates);
-    return hit;
+    const targetSquare = computer.gameBoard.receiveAttack(coordinates);
+    return targetSquare;
   };
 
   return { play, gameBoard };
