@@ -2,6 +2,13 @@
   margin: 50px;
 }
 
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 100px;
+  }
+
 .player-board,
 .computer-board {
   display: grid;
@@ -14,9 +21,6 @@
   border-style: solid;
 }
 
-.container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 100px;
+.computer-square:hover {
+    cursor: pointer;
 }

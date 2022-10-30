@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/jakemadash/battleship/issues"
   },
-  "homepage": "https://github.com/jakemadash/battleship#readme"
+  "homepage": "https://github.com/jakemadash/battleship#readme",
+  "dependencies": {
+    "@babel/polyfill": "^7.12.1"
+  }
 }
