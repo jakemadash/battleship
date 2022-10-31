@@ -19,5 +19,8 @@
   "homepage": "https://github.com/jakemadash/battleship#readme",
   "dependencies": {
     "@babel/polyfill": "^7.12.1"
+  },
+  "devDependencies": {
+    "jest-environment-jsdom": "^29.2.2"
   }
 }

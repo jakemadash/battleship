@@ -4,6 +4,7 @@ const DOM = () => {
   async function playerMove() {
     return new Promise((resolve) => {
       computerBoard.addEventListener("click", (e) => {
+        console.log(e)
         if (e.target.textContent === "") {
           e.target.classList.remove("computer-square");
           resolve(e.target);
