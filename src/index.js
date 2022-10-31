@@ -22,4 +22,5 @@ while (
   );
   setTimeout(dom.markSquare, 800, computerMove, targetSquare[0]);
 }
-alert("winner!");
+if (player.gameBoard.fleetSunk() === true) alert("Computer wins!");
+else alert('You win!')
