@@ -2,6 +2,7 @@ import { Gameboard } from "./gameboard.js";
 
 const Player = () => {
   const gameBoard = Gameboard();
+  gameBoard.createFleet();
   gameBoard.placeShips();
 
   const play = (computer, playerMove) => {

@@ -2,6 +2,7 @@ import { Gameboard } from "./gameboard.js";
 
 const ComputerPlayer = () => {
   const gameBoard = Gameboard();
+  gameBoard.createFleet();
   gameBoard.placeShips();
 
   function getRandomInt(max) {
@@ -10,7 +11,6 @@ const ComputerPlayer = () => {
 
   const play = (player) => {
     const validSquares = player.board.filter((square) => square.hit === null);
-    console.log(validSquares);
     const validCoordinates = validSquares.map((square) => square.coordinates);
     const index = getRandomInt(validCoordinates.length - 1);
     const coordinates = validCoordinates[index];

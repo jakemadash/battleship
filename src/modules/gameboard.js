@@ -20,12 +20,11 @@ const Gameboard = () => {
     const cruiser = Ship("cruiser", 3);
     const battleship = Ship("battleship", 4);
     const carrier = Ship("carrier", 5);
-    const ships = [destroyer, submarine, cruiser, battleship, carrier];
+    ships.push(destroyer, submarine, cruiser, battleship, carrier)
     return ships;
   };
 
   const placeShips = () => {
-    const ships = createFleet();
     let count = 0;
     for (let i = 0; i < ships.length; i++) {
       for (let j = 0; j < ships[i].length; j++) {
@@ -36,6 +35,14 @@ const Gameboard = () => {
     return board;
   };
 
+  const fleetSunk = () => {
+    let sunk = true;
+    for (const ship of ships) {
+      if (ship.isSunk() === false) sunk = false;
+    }
+    return sunk;
+  };
+
   const receiveAttack = (coordinates) => {
     const targetSquare = board.find(
       (square) =>
@@ -43,21 +50,17 @@ const Gameboard = () => {
     );
     if (targetSquare.ship) {
       targetSquare.ship.hit();
+      console.log(targetSquare.ship.isSunk());
+      console.log(board[0].ship.isSunk());
+      console.log(fleetSunk());
       targetSquare.hit = true;
     } else targetSquare.hit = false;
     return targetSquare;
   };
 
-  const fleetSunk = () => {
-    let sunk = true;
-    if (ships.length === 0) sunk = false;
-    for (const ship of ships) {
-      if (ship.isSunk() === false) sunk = false;
-    }
-    return sunk;
-  };
   return {
     createBoard,
+    createFleet,
     placeShips,
     receiveAttack,
     fleetSunk,
