@@ -1,10 +1,30 @@
 const DOM = () => {
   const computerBoard = document.querySelector(".computer-board");
 
+  const ships = document.querySelector(".ships");
+  const playerBoard = document.querySelector(".player-board");
+
   const rotate = () => {
-    const ships = document.querySelector(".ship-menu");
     ships.addEventListener("click", (e) => {
       e.target.classList.toggle("rotated");
+    });
+  };
+
+  const drag = () => {
+    let draggedShip = "";
+
+    ships.addEventListener("dragstart", (e) => {
+      e.dataTransfer.effectAllowed = "linkMove";
+      draggedShip = e.target;
+    });
+    playerBoard.addEventListener("dragover", (e) => {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = "move";
+    });
+    playerBoard.addEventListener("drop", (e) => {
+      e.preventDefault();
+      draggedShip.parentNode.removeChild(draggedShip);
+      e.target.appendChild(draggedShip);
     });
   };
 
@@ -26,7 +46,7 @@ const DOM = () => {
     } else playerMove.textContent = "o";
   };
 
-  return { rotate, playerMove, markSquare };
+  return { rotate, drag, playerMove, markSquare };
 };
 
 export { DOM };

@@ -18,7 +18,8 @@
   justify-content: space-around;
 }
 
-.ships > * {
+[draggable="true"] {
+  box-sizing: border-box;
   border-style: solid;
   width: 40px;
   color: blue;

@@ -7,6 +7,7 @@ const player = Player();
 const computer = ComputerPlayer();
 
 dom.rotate();
+dom.drag();
 
 while (
   player.gameBoard.fleetSunk() === false &&
