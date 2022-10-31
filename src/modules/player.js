@@ -1,5 +1,4 @@
 import { Gameboard } from "./gameboard.js";
-import { ComputerPlayer } from "./computer-player.js";
 
 const Player = () => {
   const gameBoard = Gameboard();

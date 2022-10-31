@@ -12,10 +12,10 @@ const ComputerPlayer = () => {
     const validSquares = player.board.filter((square) => square.hit === null);
     console.log(validSquares);
     const validCoordinates = validSquares.map((square) => square.coordinates);
-    const coordinates =
-      validCoordinates[getRandomInt(validCoordinates.length - 1)];
+    const index = getRandomInt(validCoordinates.length - 1);
+    const coordinates = validCoordinates[index];
     const result = player.receiveAttack(coordinates);
-    return result;
+    return [result, index];
   };
 
   return { play, gameBoard };

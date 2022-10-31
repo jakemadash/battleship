@@ -10,7 +10,6 @@ module.exports = {
   experiments: {
     topLevelAwait: true,
   },
-  testEnvironment: "jsdom",
   module: {
     rules: [
       {

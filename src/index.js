@@ -7,9 +7,11 @@ const player = Player();
 const computer = ComputerPlayer();
 
 const playerMove = await dom.playerMove();
-console.log(playerMove);
 const index = parseInt(playerMove.dataset.number);
-console.log(index);
-const targetSquare = player.play(computer, index);
+let targetSquare = player.play(computer, index);
 dom.markSquare(playerMove, targetSquare);
-// computer.play(player.gameBoard);
+targetSquare = computer.play(player.gameBoard);
+const computerMove = document.querySelector(
+  `.player-board>[data-number='${targetSquare[1] + 1}']`
+);
+dom.markSquare(computerMove, targetSquare[0]);
