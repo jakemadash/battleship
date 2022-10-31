@@ -1,6 +1,13 @@
 const DOM = () => {
   const computerBoard = document.querySelector(".computer-board");
 
+  const rotate = () => {
+    const ships = document.querySelector(".ship-menu");
+    ships.addEventListener("click", (e) => {
+      e.target.classList.toggle("rotated");
+    });
+  };
+
   async function playerMove() {
     return new Promise((resolve) => {
       computerBoard.addEventListener("click", (e) => {
@@ -19,7 +26,7 @@ const DOM = () => {
     } else playerMove.textContent = "o";
   };
 
-  return { playerMove, markSquare };
+  return { rotate, playerMove, markSquare };
 };
 
 export { DOM };

@@ -6,7 +6,7 @@ const dom = DOM();
 const player = Player();
 const computer = ComputerPlayer();
 
-console.log(computer.gameBoard.board[0]);
+dom.rotate();
 
 while (
   player.gameBoard.fleetSunk() === false &&
@@ -23,4 +23,4 @@ while (
   setTimeout(dom.markSquare, 800, computerMove, targetSquare[0]);
 }
 if (player.gameBoard.fleetSunk() === true) alert("Computer wins!");
-else alert('You win!')
+else alert("You win!");

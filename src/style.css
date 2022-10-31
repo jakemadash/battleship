@@ -22,11 +22,19 @@
   border-style: solid;
   width: 40px;
   color: blue;
+  transition: transform 0.5s;
+}
+
+.rotated {
+  transform: rotate(90deg);
 }
 
 .ships > *:hover {
   cursor: pointer;
-  background-image: ;
+  background-image: url(./rotate.svg);
+  background-position: center;
+  background-size: 20px;
+  background-repeat: no-repeat;
 }
 
 .destroyer {
@@ -69,7 +77,7 @@
 }
 
 .player-board {
-  margin-left: 400px;
+  margin-left: 100px;
 }
 
 .computer-board {
