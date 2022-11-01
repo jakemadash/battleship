@@ -6,7 +6,7 @@ const dom = DOM();
 const player = Player();
 const computer = ComputerPlayer();
 
-dom.shipCoordinates();
+// dom.shipCoordinates();
 
 while (
   player.gameBoard.fleetSunk() === false &&

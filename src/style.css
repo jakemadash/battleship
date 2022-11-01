@@ -1,5 +1,13 @@
-:root {
-  margin: 50px;
+.header {
+  display: flex;
+  align-items: center;
+  margin-left: 250px;
+}
+
+button {
+  height: 30px;
+  margin-left: 20px;
+  font-size: 1rem;
 }
 
 .container {
