@@ -4,55 +4,7 @@
 
 .container {
   display: flex;
-}
-
-.ship-menu {
-  width: 400px;
-}
-
-.ships {
-  width: 300px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 80px;
-  justify-content: space-around;
-}
-
-[draggable="true"] {
-  box-sizing: border-box;
-  border-style: solid;
-  width: 40px;
-  color: blue;
-  transition: transform 0.5s;
-}
-
-.rotated {
-  transform: rotate(90deg);
-}
-
-.ships > *:hover {
-  cursor: pointer;
-  background-image: url(./rotate.svg);
-  background-position: center;
-  background-size: 20px;
-  background-repeat: no-repeat;
-}
-
-.destroyer {
-  height: 80px;
-}
-
-.submarine,
-.cruiser {
-  height: 120px;
-}
-
-.battleship {
-  height: 160px;
-}
-
-.carrier {
-  height: 200px;
+  justify-content: center;
 }
 
 .board-container {
@@ -75,18 +27,6 @@
   border-width: 1px;
   font-size: 2rem;
   text-align: center;
-}
-
-.player-board {
-  margin-left: 100px;
-}
-
-.computer-board {
-  visibility: hidden;
-}
-
-.computer-board > * {
-  visibility: inherit;
 }
 
 .computer-square:hover {
