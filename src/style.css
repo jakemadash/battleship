@@ -37,6 +37,7 @@ button {
   text-align: center;
 }
 
-.computer-square:hover {
+.computer-square:hover,
+.player-square:hover {
   cursor: pointer;
 }

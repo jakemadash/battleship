@@ -1,5 +1,6 @@
 const DOM = () => {
   const computerBoard = document.querySelector(".computer-board");
+  const playerBoard = document.querySelector(".player-board");
 
   const drawShips = (coordinates) => {
     const playerSquares = document.querySelectorAll(".player-square");
@@ -10,17 +11,25 @@ const DOM = () => {
     });
   };
 
-  const shipCoordinates = () => {
-    const coordinates = [];
-    const destroyer = [`${prompt("Enter destroyer (length: 2) coordinates")}`];
-    console.log(destroyer);
-    console.log(typeof destroyer);
-    const submarine = [`${prompt("Enter submarine (length: 3) coordinates")}`];
-    const cruiser = prompt("Enter cruiser (length: 3) coordinates");
-    const battleship = prompt("Enter battleship (length: 4) coordinates");
-    const carrier = prompt("Enter carrier (length: 5) coordinates");
-    coordinates.push(destroyer, submarine, cruiser, battleship, carrier);
-    return coordinates;
+  const placeShip = () => {
+    const confirm = document.querySelector("button");
+    const redo = document.querySelector("button+button");
+    const chosenSquares = [];
+    const controller = new AbortController();
+    playerBoard.addEventListener(
+      "click",
+      (e) => {
+        e.target.style.backgroundColor = "blue";
+        chosenSquares.push(e.target);
+        if (chosenSquares.length === 2) {
+          controller.abort();
+          confirm.removeAttribute("hidden");
+          redo.removeAttribute("hidden");
+        }
+      },
+      { signal: controller.signal }
+    );
+    return chosenSquares;
   };
 
   async function playerMove() {
@@ -41,7 +50,7 @@ const DOM = () => {
     } else playerMove.textContent = "o";
   };
 
-  return { shipCoordinates, playerMove, markSquare };
+  return { placeShip, playerMove, markSquare };
 };
 
 export { DOM };

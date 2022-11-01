@@ -5,8 +5,13 @@ import { DOM } from "./modules/dom.js";
 const dom = DOM();
 const player = Player();
 const computer = ComputerPlayer();
+const ships = player.gameBoard.ships;
+console.log(ships);
 
-// dom.shipCoordinates();
+ships.forEach((ship) => {
+  dom.placeShip();
+})
+
 
 while (
   player.gameBoard.fleetSunk() === false &&
