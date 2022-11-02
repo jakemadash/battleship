@@ -11,20 +11,25 @@ const DOM = () => {
     return header.textContent;
   };
 
+  // fill in any squares in between chosen start and end points
   const drawShip = (chosenSquares, ship) => {
     const playerSquares = document.querySelectorAll(".player-square");
     const squareOne = parseInt(chosenSquares[0].dataset.number);
     const squareTwo = parseInt(chosenSquares[1].dataset.number);
+
+    // determine if horizontal or vertical move
     const horizontal = squareTwo - squareOne === ship.length - 1;
     const vertical = squareTwo - squareOne === (ship.length - 1) * 10;
     const filledSquares = [...chosenSquares];
     if (horizontal)
       for (let i = squareOne; i < squareTwo; i++) {
+        // increase by 1 square for horizontal and color blue
         playerSquares[i].style.backgroundColor = "blue";
         filledSquares.push(playerSquares[i]);
       }
     else if (vertical)
       for (let i = squareOne - 1; i < squareTwo; i += 10) {
+        // increase by 10 squares for vertical and color blue
         playerSquares[i].style.backgroundColor = "blue";
         filledSquares.push(playerSquares[i]);
       }
@@ -53,17 +58,18 @@ const DOM = () => {
 
   async function placeShip(ship) {
     let chosenSquares = [];
-    console.log(ship);
     const controller = new AbortController();
     return new Promise((resolve) => {
       playerBoard.addEventListener(
         "click",
         (e) => {
           if (e.target.style.backgroundColor !== "blue") {
+            // don't listen if square has already been selected/colored
             e.target.style.backgroundColor = "blue";
             chosenSquares.push(e.target);
           }
           if (
+            // invalid move (diagonal)
             chosenSquares.length === 2 &&
             validateSquares(ship, chosenSquares) === false
           ) {
@@ -71,13 +77,16 @@ const DOM = () => {
               "Squares must be ship length apart and horizontal/vertical only. Please try again."
             );
             chosenSquares.forEach((square) => {
+              // reset selected squares to white and clear selection array
               square.style.backgroundColor = "white";
             });
             chosenSquares = [];
           } else if (
+            // valid move
             chosenSquares.length === 2 &&
             validateSquares(ship, chosenSquares) === true
           ) {
+            // stop event listener, show confirm/redo buttons, and return chosen squares
             controller.abort();
             buttons.removeAttribute("hidden");
             resolve(
@@ -93,7 +102,9 @@ const DOM = () => {
   async function playerMove() {
     return new Promise((resolve) => {
       computerBoard.addEventListener("click", (e) => {
+        // ensure blank square
         if (e.target.textContent === "") {
+          // remove hover pointer and return chosen square
           e.target.classList.remove("computer-square");
           resolve(e.target);
         }
@@ -102,7 +113,6 @@ const DOM = () => {
   }
 
   const markSquare = (playerMove, targetSquare) => {
-    console.log(playerMove, targetSquare)
     if (targetSquare.hit === true) {
       playerMove.textContent = "x";
       playerMove.style.color = "red";

@@ -1,6 +1,7 @@
 import { Ship } from "./ship.js";
 
 const Gameboard = () => {
+  // create 10 x 10 game board with coordinates
   const createBoard = () => {
     const board = [];
     for (let i = 0; i < 10; i++) {
@@ -15,6 +16,7 @@ const Gameboard = () => {
   const ships = [];
 
   const createFleet = () => {
+    // create ships with name and length
     const destroyer = Ship("destroyer", 2);
     const submarine = Ship("submarine", 3);
     const cruiser = Ship("cruiser", 3);
@@ -25,6 +27,7 @@ const Gameboard = () => {
   };
 
   const placeShips = (ship, filledSquares) => {
+    // computer case, predetermined coordinates
     if (filledSquares === null) {
       let count = 0;
       for (let i = 0; i < ships.length; i++) {
@@ -34,6 +37,7 @@ const Gameboard = () => {
         count += 10;
       }
     } else {
+      // player case, loop through squares selected on board
       filledSquares.forEach((square) => {
         const index = square.dataset.number - 1;
         board[index].ship = ship;
@@ -51,15 +55,17 @@ const Gameboard = () => {
   };
 
   const receiveAttack = (coordinates) => {
+    // match back end board index with clicked square
     const targetSquare = board.find(
       (square) =>
         JSON.stringify(coordinates) === JSON.stringify(square.coordinates)
     );
+
+    // if ship present at index, ship hit
     if (targetSquare.ship) {
       targetSquare.ship.hit();
       targetSquare.hit = true;
     } else targetSquare.hit = false;
-    console.log(targetSquare);
     return targetSquare;
   };
 
