@@ -3,7 +3,7 @@ import { Gameboard } from "./gameboard.js";
 const ComputerPlayer = () => {
   const gameBoard = Gameboard();
   gameBoard.createFleet();
-  gameBoard.placeShips();
+  gameBoard.placeShips(null, null);
 
   function getRandomInt(max) {
     return Math.floor(Math.random() * max);
@@ -15,7 +15,9 @@ const ComputerPlayer = () => {
     const index = getRandomInt(validCoordinates.length - 1);
     const coordinates = validCoordinates[index];
     const result = player.receiveAttack(coordinates);
-    return [result, index];
+    const originalIndex = parseInt(coordinates.join(""));
+    console.log(coordinates, originalIndex);
+    return [result, originalIndex];
   };
 
   return { play, gameBoard };

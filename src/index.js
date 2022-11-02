@@ -17,7 +17,8 @@ for (let i = 0; i < ships.length; i++) {
     });
     i--;
   } else {
-    dom.drawShip(chosenSquares, ships[i]);
+    const filledSquares = dom.drawShip(chosenSquares, ships[i]);
+    player.gameBoard.placeShips(ships[i], filledSquares);
     if (i === ships.length - 1) dom.shipHeader(null);
   }
 }
@@ -26,6 +27,7 @@ while (
   player.gameBoard.fleetSunk() === false &&
   computer.gameBoard.fleetSunk() === false
 ) {
+  console.log(player.gameBoard.board);
   const playerMove = await dom.playerMove();
   const index = parseInt(playerMove.dataset.number);
   let targetSquare = player.play(computer, index);

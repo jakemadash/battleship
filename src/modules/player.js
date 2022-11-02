@@ -3,7 +3,6 @@ import { Gameboard } from "./gameboard.js";
 const Player = () => {
   const gameBoard = Gameboard();
   gameBoard.createFleet();
-  gameBoard.placeShips();
 
   const play = (computer, playerMove) => {
     const coordinates = gameBoard.board[playerMove - 1].coordinates;

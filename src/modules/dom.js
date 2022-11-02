@@ -8,23 +8,27 @@ const DOM = () => {
     if (ship === null) header.textContent = "";
     else
       header.textContent = `Choose starting and ending squares for ${ship.name} (length: ${ship.length})`;
+    return header.textContent;
   };
 
   const drawShip = (chosenSquares, ship) => {
     const playerSquares = document.querySelectorAll(".player-square");
-    const squareOne = chosenSquares[0].dataset.number;
-    const squareTwo = chosenSquares[1].dataset.number;
+    const squareOne = parseInt(chosenSquares[0].dataset.number);
+    const squareTwo = parseInt(chosenSquares[1].dataset.number);
     const horizontal = squareTwo - squareOne === ship.length - 1;
     const vertical = squareTwo - squareOne === (ship.length - 1) * 10;
-    console.log(horizontal);
+    const filledSquares = [...chosenSquares];
     if (horizontal)
       for (let i = squareOne; i < squareTwo; i++) {
         playerSquares[i].style.backgroundColor = "blue";
+        filledSquares.push(playerSquares[i]);
       }
     else if (vertical)
       for (let i = squareOne - 1; i < squareTwo; i += 10) {
         playerSquares[i].style.backgroundColor = "blue";
+        filledSquares.push(playerSquares[i]);
       }
+    return filledSquares;
   };
 
   async function confirmPlacement() {
@@ -98,6 +102,7 @@ const DOM = () => {
   }
 
   const markSquare = (playerMove, targetSquare) => {
+    console.log(playerMove, targetSquare)
     if (targetSquare.hit === true) {
       playerMove.textContent = "x";
       playerMove.style.color = "red";

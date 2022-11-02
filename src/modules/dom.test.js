@@ -21,3 +21,4 @@ test("marks square depending on whether ship is present on square", () => {
   expect(computerSquareOne.style.color).toBe("red");
   expect(computerSquareTwo.textContent).toBe("o");
 });
+

@@ -20,17 +20,24 @@ const Gameboard = () => {
     const cruiser = Ship("cruiser", 3);
     const battleship = Ship("battleship", 4);
     const carrier = Ship("carrier", 5);
-    ships.push(destroyer, submarine, cruiser, battleship, carrier)
+    ships.push(destroyer, submarine, cruiser, battleship, carrier);
     return ships;
   };
 
-  const placeShips = () => {
-    let count = 0;
-    for (let i = 0; i < ships.length; i++) {
-      for (let j = 0; j < ships[i].length; j++) {
-        board[count + j].ship = ships[i];
+  const placeShips = (ship, filledSquares) => {
+    if (ship === null) {
+      let count = 0;
+      for (let i = 0; i < ships.length; i++) {
+        for (let j = 0; j < ships[i].length; j++) {
+          board[count + j].ship = ships[i];
+        }
+        count += 10;
       }
-      count += 10;
+    } else {
+      filledSquares.forEach((square) => {
+        const index = square.dataset.number - 1;
+        board[index].ship = ship;
+      });
     }
     return board;
   };
@@ -50,11 +57,9 @@ const Gameboard = () => {
     );
     if (targetSquare.ship) {
       targetSquare.ship.hit();
-      console.log(targetSquare.ship.isSunk());
-      console.log(board[0].ship.isSunk());
-      console.log(fleetSunk());
       targetSquare.hit = true;
     } else targetSquare.hit = false;
+    console.log(targetSquare);
     return targetSquare;
   };
 
