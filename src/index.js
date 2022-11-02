@@ -6,12 +6,11 @@ const dom = DOM();
 const player = Player();
 const computer = ComputerPlayer();
 const ships = player.gameBoard.ships;
-console.log(ships);
 
-ships.forEach((ship) => {
-  dom.placeShip();
-})
-
+for (const ship of ships) {
+  const coordinates = await dom.placeShip(ship);
+  const choice = await dom.confirmPlacement();
+}
 
 while (
   player.gameBoard.fleetSunk() === false &&
