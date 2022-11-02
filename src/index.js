@@ -7,9 +7,19 @@ const player = Player();
 const computer = ComputerPlayer();
 const ships = player.gameBoard.ships;
 
-for (const ship of ships) {
-  const coordinates = await dom.placeShip(ship);
-  const choice = await dom.confirmPlacement();
+for (let i = 0; i < ships.length; i++) {
+  dom.shipHeader(ships[i]);
+  const chosenSquares = await dom.placeShip(ships[i]);
+  const confirm = await dom.confirmPlacement();
+  if (confirm === false) {
+    chosenSquares.forEach((square) => {
+      square.style.backgroundColor = "white";
+    });
+    i--;
+  } else {
+    dom.drawShip(chosenSquares, ships[i]);
+    if (i === ships.length - 1) dom.shipHeader(null);
+  }
 }
 
 while (

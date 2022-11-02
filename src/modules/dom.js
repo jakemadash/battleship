@@ -3,18 +3,34 @@ const DOM = () => {
   const playerBoard = document.querySelector(".player-board");
   const buttons = document.querySelector(".buttons");
 
-  const drawShips = (coordinates) => {
+  const shipHeader = (ship) => {
+    const header = document.querySelector("h3");
+    if (ship === null) header.textContent = "";
+    else
+      header.textContent = `Choose starting and ending squares for ${ship.name} (length: ${ship.length})`;
+  };
+
+  const drawShip = (chosenSquares, ship) => {
     const playerSquares = document.querySelectorAll(".player-square");
-    coordinates.forEach((coordinate) => {
-      if (coordinate[0] === 0)
-        playerSquares[coordinate[1]].style.backgroundColor = "blue";
-      else playerSquares;
-    });
+    const squareOne = chosenSquares[0].dataset.number;
+    const squareTwo = chosenSquares[1].dataset.number;
+    const horizontal = squareTwo - squareOne === ship.length - 1;
+    const vertical = squareTwo - squareOne === (ship.length - 1) * 10;
+    console.log(horizontal);
+    if (horizontal)
+      for (let i = squareOne; i < squareTwo; i++) {
+        playerSquares[i].style.backgroundColor = "blue";
+      }
+    else if (vertical)
+      for (let i = squareOne - 1; i < squareTwo; i += 10) {
+        playerSquares[i].style.backgroundColor = "blue";
+      }
   };
 
   async function confirmPlacement() {
     return new Promise((resolve) => {
       buttons.addEventListener("click", (e) => {
+        buttons.setAttribute("hidden", "");
         if (e.target.textContent === "confirm") resolve(true);
         else resolve(false);
       });
@@ -32,33 +48,37 @@ const DOM = () => {
   };
 
   async function placeShip(ship) {
-    const chosenSquares = [];
-    const valid =
-      chosenSquares.length === 2 &&
-      validateSquares(ship, chosenSquares) === true;
-    const invalid =
-      chosenSquares.length === 2 &&
-      validateSquares(ship, chosenSquares) === false;
+    let chosenSquares = [];
+    console.log(ship);
     const controller = new AbortController();
     return new Promise((resolve) => {
       playerBoard.addEventListener(
         "click",
         (e) => {
-          e.target.style.backgroundColor = "blue";
-          chosenSquares.push(e.target);
-          if (invalid) {
-            controller.abort();
+          if (e.target.style.backgroundColor !== "blue") {
+            e.target.style.backgroundColor = "blue";
+            chosenSquares.push(e.target);
+          }
+          if (
+            chosenSquares.length === 2 &&
+            validateSquares(ship, chosenSquares) === false
+          ) {
             alert(
               "Squares must be ship length apart and horizontal/vertical only. Please try again."
             );
             chosenSquares.forEach((square) => {
               square.style.backgroundColor = "white";
             });
-            placeShip(ship);
-          } else if (valid) {
+            chosenSquares = [];
+          } else if (
+            chosenSquares.length === 2 &&
+            validateSquares(ship, chosenSquares) === true
+          ) {
             controller.abort();
             buttons.removeAttribute("hidden");
-            resolve(chosenSquares);
+            resolve(
+              chosenSquares.sort((a, b) => a.dataset.number - b.dataset.number)
+            );
           }
         },
         { signal: controller.signal }
@@ -84,7 +104,14 @@ const DOM = () => {
     } else playerMove.textContent = "o";
   };
 
-  return { placeShip, confirmPlacement, playerMove, markSquare };
+  return {
+    shipHeader,
+    placeShip,
+    confirmPlacement,
+    playerMove,
+    markSquare,
+    drawShip,
+  };
 };
 
 export { DOM };
