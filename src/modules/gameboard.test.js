@@ -28,11 +28,19 @@ test("squares all have ship property", () => {
   }
 });
 
-test.todo("places ships on correct coordinates");
+test("places ships on specified coordinates", () => {
+  ships.push(ship);
+  ships.push(shipTwo);
+  gameBoard.placeShips(null, null);
+  expect(board[0].ship).toBe(ship);
+  expect(board[10].ship).toBe(shipTwo);
+  gameBoard.placeShips(shipTwo, [{dataset: {number: 4}}, {dataset: {number: 5}}]);
+  expect(board[3].ship).toBe(shipTwo);
+  expect(board[4].ship).toBe(shipTwo);
+});
 
 test("ship and board values update correctly after attack", () => {
   board[0].ship = ship;
-  ships.push(ship);
   gameBoard.receiveAttack([0, 0]);
   gameBoard.receiveAttack([0, 1]);
   expect(board[0].hit).toBe(true);
@@ -42,7 +50,6 @@ test("ship and board values update correctly after attack", () => {
 
 test("reports whether all ships have sunk", () => {
   board[2].ship = shipTwo;
-  ships.push(shipTwo);
   expect(board[0].ship.isSunk()).toBe(true);
   expect(gameBoard.fleetSunk()).toBe(false);
   gameBoard.receiveAttack([0, 2]);

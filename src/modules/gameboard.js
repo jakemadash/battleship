@@ -25,7 +25,7 @@ const Gameboard = () => {
   };
 
   const placeShips = (ship, filledSquares) => {
-    if (ship === null) {
+    if (filledSquares === null) {
       let count = 0;
       for (let i = 0; i < ships.length; i++) {
         for (let j = 0; j < ships[i].length; j++) {
